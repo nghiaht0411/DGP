@@ -27,7 +27,7 @@ void test()
     cout << "Commence anytime learning ..." << endl;
     optimizer* learner = new optimizer(od, config, config->nBasis);
     learner->optimize();
-    cout << "Done. Summarizing Results:" << endl;
+    cout << "Done." << endl;
 }
 
 int main()

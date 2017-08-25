@@ -30,12 +30,8 @@ double predictor::PIC_predict(mat &M, vec &b)
         SFOR(j, od->nBlock) diff[i][j] = zeros <mat> (od->tSize, 1);
     }
 
-    //cout << nz << endl;
-
     int chunk = nz / nThread;
 	if (chunk == 0) chunk++;
-
-	//cout << "CHUNK = " << chunk << endl;
 
 	//#pragma omp parallel for schedule(static, chunk)
     SFOR(i, nz)
@@ -47,8 +43,6 @@ double predictor::PIC_predict(mat &M, vec &b)
 
         SFOR(j, od->nBlock)
         {
-        	//cout << i << " " << j << endl;
-
             mat KBjBj, KTjBj;
             mat XBj = (*od->getxb(j));
             mat XTj = (*od->getxt(j));
@@ -80,7 +74,7 @@ double predictor::PIC_predict(mat &M, vec &b)
     return sqrt((1.0 / od->nTest) * rmse);
 }
 
-double predictor::predict(mat &M, vec &b)
+double predictor::predict(mat &M, vec &b) // DTC predict -- not nice, not good
 {
     vec alpha;
     double rmse = 0.0;

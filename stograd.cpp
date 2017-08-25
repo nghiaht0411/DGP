@@ -39,8 +39,6 @@ void stograd::compute(mat &Z, vec &K, vec &eta, int M_r, int M_c, vec &res) // c
     int nThread = omp_get_num_procs(), chunk = nz / nThread;
 	if (chunk == 0) chunk++;
 
-	//cout << nThread << endl;
-
 	vm res_t(nThread); SFOR(i, nThread) res_t[i] = vec(eta.n_rows);
 
 	#pragma omp parallel for schedule(dynamic, chunk)
